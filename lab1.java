@@ -40,24 +40,40 @@ public static int secondSmallest(int[] arr) {
     return arr[secondSmall];
 }
 
-//Q3. for this i tried to use reccursion but that requires to add one more argument to our method, instead i used the following approach where i use double for loop, this is not efficient compared to using recursion.
+//Q3. for this i tried to use reccursion along with using powerset but that requires to add one more argument to our method, instead i used the following approach where i use double for loop, this is not efficient compared to using recursion.
 public static boolean sumFound(List list, int k) {
 //implement        
-        int previous = 0;
-         for (int i = 0; i < list.size(); i++) {
-            //Loop to compare with the first item
-            for (int j = i + 1; j < list.size(); j++) {
-    //If first item plus second item equals needed value print the result
-                if (i + j + previous == sum) {
-                    return true;
-                }  else {
-                    previous += sum;
-
+        List<Integer> tempInt = new ArrayList<Integer>();
+        
+     if (list == null) return false;
+        List<Set<Integer>> temp = PowerSet.powerSet(list);
+        for (Set<Integer> setItems : temp) {
+             = convertSetToList(setItems);
+            int tempSum = 0;
+            for (int i = 0; i < tempInt.size(); i++) {
+                for (int j = i; j < tempInt.size(); j++) {
+                    if (tempSum < k) tempSum += j;        //
+                    else if (tempSum == k) return true;   //
+                    else break;                           //
                 }
             }
         }
+
         return false;
 }
+
+/**
+     *
+     * @param set distinct items
+     * @param <T> currently Integer value
+     * @return List of Object
+     */
+    public static <T> List<T> convertSetToList(Set<T> set) {
+        List<T> list = new ArrayList<>();
+        for (T t : set)
+            list.add(t);
+        return list;
+    }
 
 //Q4. converting the list to array and doing a sort on the array, and returning back the array to list
 public static void sort(ArrayList<Integer> list){
